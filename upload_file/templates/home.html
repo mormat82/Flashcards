@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <ul>
+    <li>
+      <a href="{% url 'model_form_upload' %}">Model Form Upload</a>
+    </li>
+  </ul>
+
+  <p>Uploaded files:</p>
+  <ul>
+    {% for obj in documents %}
+      <li>
+        <a href="/top-100/">{{ obj.document.name }}</a>
+        <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+        <button value="top_words">Generuj fiszki</button>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block content %}#}
+{#  <ul>#}
+{#    <li>#}
+{#      <a href="{% url 'model_form_upload' %}">Model Form Upload</a>#}
+{#    </li>#}
+{#  </ul>#}
+{##}
+{#  <p>Uploaded files:</p>#}
+{#  <ul>#}
+{#  <form action="http://127.0.0.1:8000/top-100/" method="GET">#}
+{#    {% for obj in documents %}#}
+{#      <li>#}
+{#        <!--<a href="/top-100?file_documents={{ obj.document.pk }}">{{ obj.document.name }}</a>-->#}
+{#        <a href="http://127.0.0.1:8000/top-100/{{ obj.document.book_id }}">{{ obj.document.name }}</a>#}
+{#        <small>(Uploaded at: {{ obj.uploaded_at }})</small>#}
+{#        <button type="submit" value="top_words">Generuj fiszki</button>#}
+{#      </li>#}
+{#    {% endfor %}#}
+{#  </form>#}
+{#  </ul>#}
+{#{% endblock %}#}
