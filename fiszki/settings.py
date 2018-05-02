@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'flashcards',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'root',
-        'PASSWORD': '***',
+        'PASSWORD': 'coderslab',
         'OPTIONS': {
                     'autocommit': True,
         },

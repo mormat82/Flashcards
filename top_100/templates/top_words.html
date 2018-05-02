@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>!!!!!!!!!!!!WOW!!!!!!!!!!!!</h1>
     <h2>Najczęściej występujące słówka:</h2>
     <ul>
-           {% for flascard in top_flascards %}
-              <li><input type="button" value="Dodaj do nauczonych">  <p>{{ flascard }}</p></li>
+           {% for flashcard in top_flashcards %}
+               <li> <p>{{ flashcard.0 }} {{ flashcard.1 }}</p><input type="button" value="Dodaj do nauczonych">  </li>
            {% endfor %}
     </ul>
 
