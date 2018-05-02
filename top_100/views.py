@@ -35,14 +35,9 @@ class FlashcardsListView(LoginRequiredMixin, View):
 
                 list_unique_words = list(set(list_lower_case)) #usuwamy duplikujące się wyrazy
                 print("lista bez duplikatów to", len(list_unique_words), "słów")
-
                 list_without_known_words = [x for x in list_lower_case if x not in know_words]
-                print("lista 5 bez znanych", list_without_known_words)
                 print(len(list_without_known_words))
-
                 word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
-                print("list_without_known_words", list_without_known_words)
-
                 top_100 = word_counts.most_common(150)  # już na tym można działać, wyświetlić listę na stronie
                 print(top_100)
                 return top_100
