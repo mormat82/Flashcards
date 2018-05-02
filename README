@@ -1,0 +1,7 @@
+Aplikacja nie jest jeszcze skończona. Będzie służyła do nauki j. angielskiego przez czytanie książek. Sama aplikacja będzie pomagała
+nauczyć się najczęściej używanych słówek w książce.
+Na razie można załadować plik (książkę w j. angielskim) z rozszerzeniem txt, po czym aplikacja zwraca 20% najczęściej używanych w książce 
+słówek. Docelowo użytkownik będzie ustawiał % najczęściej wystepujących słówek jakich chce się nauczyć. 
+Kolejnym etapem jest automatyczne generowanie fiszek. Program zaproponuje gotowe fiszki a użytkownik będzie mógł je zatwierdzić lub 
+przeedytować i zrobić polskie tłumaczenie wg własnego uznania.
+Aplikacja będzie gotowa z wyżej wymienionymi funkcjami na początku maja i wystawiona na serwer.
