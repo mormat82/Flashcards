@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'fiszki.urls'
+ROOT_URLCONF = 'flashcards.urls'
 
 TEMPLATES = [
     {
