@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('account.urls')),
     url(r'^upload-files/', include('upload_file.urls')),
-    url(r'^top-100/', include('top_100.urls')),
+    url(r'^most-common-words/', include('most_common_words.urls')),
 ]

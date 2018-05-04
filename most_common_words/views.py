@@ -38,21 +38,21 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 list_without_known_words = [x for x in list_lower_case if x not in know_words]
                 print(len(list_without_known_words))
                 word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
-                top_100 = word_counts.most_common(150)  # już na tym można działać, wyświetlić listę na stronie
-                print(top_100)
-                return top_100
+                list_most_common_words = word_counts.most_common(150)  # już na tym można działać, wyświetlić listę na stronie
+                print(list_most_common_words)
+                return list_most_common_words
 
 
     def get(self, request):
-        top_100 = self.most_used_words(request)
+        list_most_common_words = self.most_used_words(request)
         ctx = {
-            "top_flashcards": top_100,
+            "top_flashcards": list_most_common_words,
         }
         return render(request, "top_words.html", ctx)
 
 
 # def save_to_base():
-#     for x,y in top_100:
+#     for x,y in list_most_common_words:
 #         a = TopWords(word_eng=x, word_frequency=y)
 #         a.save()
 

@@ -36,6 +36,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='topwords',
             name='user_project',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='top_100.UserProject'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='most_common_words.UserProject'),
         ),
     ]

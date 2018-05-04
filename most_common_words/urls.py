@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
-from top_100.views import FlashcardsListView #CreateListFlashcards
+from most_common_words.views import FlashcardsListView #CreateListFlashcards
 
 urlpatterns = [
 

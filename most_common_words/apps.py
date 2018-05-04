@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class Top100Config(AppConfig):
-    name = 'top_100'
+    name = 'most_common_words'

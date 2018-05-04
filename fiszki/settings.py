@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'account',
     'django.contrib.admin',
     'upload_file',
-    'top_100',
+    'most_common_words',
 ]
 
 MIDDLEWARE = [
