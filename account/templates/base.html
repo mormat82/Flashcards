@@ -15,11 +15,11 @@
                 <li {% if section == "dashboard" %}class="selected"{% endif %}>
                     <a href="{% url "dashboard" %}">Panel główny</a>
                 </li>
-                <li {% if section == "images" %}class="selected"{% endif %}>
-                    <a href="/top-100/">Ucz się</a>
-                </li>
                 <li {% if section == "people" %}class="selected"{% endif %}>
-                    <a href="/upload-files/uploads/form/">Projekt</a>
+                    <a href="/upload-files/uploads/form/">Zaimportuj książkę</a>
+                </li>
+                <li {% if section == "images" %}class="selected"{% endif %}>
+                    <a href="{% url "home" %}">Twoje książki</a>
                 </li>
             </ul>
         {% endif %}

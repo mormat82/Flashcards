@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'fiszki.wsgi.application'
+WSGI_APPLICATION = 'flashcards.wsgi.application'
 
 
 # Database

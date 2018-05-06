@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def home(request):
-    # documents = Document.objects.all()
     documents = Document.objects.filter(user = request.user)
     return render(request, 'home.html', { 'documents': documents })
 
