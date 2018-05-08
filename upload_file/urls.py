@@ -8,6 +8,6 @@ from upload_file.views import home, model_form_upload
 urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^uploads/form/$', model_form_upload, name='model_form_upload'),
-    url(r'^admin/', admin.site.urls),
+    # url(r'^admin/', admin.site.urls),
     # url(r'^frequently-words', )
 ]

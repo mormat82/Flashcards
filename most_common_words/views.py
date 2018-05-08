@@ -33,7 +33,7 @@ class FlashcardsListView(LoginRequiredMixin, View):
                              for line in f for word in line.split()]
                 list_lower_case = [n.lower() for n in list_clear_words if len(n) > 3]
 
-                list_unique_words = list(set(list_lower_case)) 
+                list_unique_words = list(set(list_lower_case))
                 print("lista bez duplikatów to", len(list_unique_words), "słów")
                 list_without_known_words = [x for x in list_lower_case if x not in know_words]
                 print(len(list_without_known_words))
