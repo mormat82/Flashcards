@@ -29,6 +29,9 @@ class FlashcardsListView(LoginRequiredMixin, View):
                                  replace(".", "").
                                  replace('"', '').
                                  replace("=", "").
+                                 replace('[', '').
+                                 replace('(', '').
+                                 replace(":", "").
                                  replace("/", "")
                              for line in f for word in line.split()]
                 list_lower_case = [n.lower() for n in list_clear_words if len(n) > 3]
