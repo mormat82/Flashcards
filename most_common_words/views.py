@@ -74,11 +74,3 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 return render(request, "top_words.html", ctx)
 
 
-
-
-#     def save_to_base():
-#         for x,y in list_most_common_words:
-#             a = TopWords(word_eng=x, word_frequency=y)
-#             a.save()
-
-        #save_to_base()
