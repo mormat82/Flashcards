@@ -3,8 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from collections import Counter
 from django.views import View
 from most_common_words.models import TopWords
-from upload_file.models import Document
-
 
 
 know_words = ['public', 'that', 'you', 'the', 'and', 'which', 'with', 'their', 'will', 'this',
@@ -48,15 +46,6 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 return list_most_common_words
 
 
-    # def save_to_base(self, request):
-    #     list_most_common_words1 = most_used_words(request)
-    #     print(list_most_common_words1)
-    #     for x,y in list_most_common_words1:
-    #         a = TopWords(word_eng=x, word_frequency=y)
-    #         a.save()
-
-
-
     def get(self, request):
         if request.method == 'GET':
             if request.GET.get("id_project"):
@@ -64,7 +53,6 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 list_most_common_words = self.most_used_words(request)
                 current_user = request.user
                 id_project1 = self.id_project
-                # print(list_most_common_words)
                 for x,y in list_most_common_words:
                     a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
                     a.save()
