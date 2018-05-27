@@ -147,6 +147,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # # EMAIL_PORT = 587
 # # EMAIL_USE_TLS = True
 
-MEDIA_ROOT = '/home/mati/PycharmProjects/FISZKI/'
+MEDIA_ROOT = '/home/mati/PycharmProjects/Flashcards/'
 
 MEDIA_URL = '/documents/'

@@ -11,7 +11,7 @@
   <ul>
     {% for obj in documents %}
       <li>
-        <a href="/most-common-words/?name_doc={{ obj.document.name }}">{{ obj.document.name }}</a>
+        <a href="/most-common-words/?name_doc={{ obj.document.name }}&id_project={{ obj.id }}">{{ obj.document.name }}</a>
         <small>(Uploaded at: {{ obj.uploaded_at }})</small>
           <small>(ID: {{ obj.id }})</small>
         <button value="top_words">Generuj fiszki</button>

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from collections import Counter
 from django.views import View
+from most_common_words.models import TopWords
+from upload_file.models import Document
 
 
 
@@ -23,8 +25,8 @@ class FlashcardsListView(LoginRequiredMixin, View):
     def most_used_words(self, request):
         if request.method == 'GET':
             if request.GET.get("name_doc"):
-                name_doc = request.GET.get("name_doc")
-                with open("/home/mati/PycharmProjects/FISZKI/" + name_doc) as f:
+                self.name_doc = request.GET.get("name_doc")
+                with open("/home/mati/PycharmProjects/Flashcards/" + self.name_doc) as f:
                     list_clear_words = [word.replace(",", "").
                                  replace(".", "").
                                  replace('"', '').
@@ -33,8 +35,8 @@ class FlashcardsListView(LoginRequiredMixin, View):
                                  replace('(', '').
                                  replace(":", "").
                                  replace("/", "")
-                             for line in f for word in line.split()]
-                list_lower_case = [n.lower() for n in list_clear_words if len(n) > 3]
+                                for line in f for word in line.split()]
+                list_lower_case = [n.lower() for n in list_clear_words if len(n) > 2]
 
                 list_unique_words = list(set(list_lower_case))
                 print("lista bez duplikatów to", len(list_unique_words), "słów")
@@ -46,17 +48,37 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 return list_most_common_words
 
 
+    # def save_to_base(self, request):
+    #     list_most_common_words1 = most_used_words(request)
+    #     print(list_most_common_words1)
+    #     for x,y in list_most_common_words1:
+    #         a = TopWords(word_eng=x, word_frequency=y)
+    #         a.save()
+
+
+
     def get(self, request):
-        list_most_common_words = self.most_used_words(request)
-        ctx = {
-            "top_flashcards": list_most_common_words,
-        }
-        return render(request, "top_words.html", ctx)
+        if request.method == 'GET':
+            if request.GET.get("id_project"):
+                self.id_project = request.GET.get("id_project")
+                list_most_common_words = self.most_used_words(request)
+                current_user = request.user
+                id_project1 = self.id_project
+                # print(list_most_common_words)
+                for x,y in list_most_common_words:
+                    a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
+                    a.save()
+                ctx = {
+                    "top_flashcards": list_most_common_words,
+                }
+                return render(request, "top_words.html", ctx)
 
 
-# def save_to_base():
-#     for x,y in list_most_common_words:
-#         a = TopWords(word_eng=x, word_frequency=y)
-#         a.save()
 
-# save_to_base()
+
+#     def save_to_base():
+#         for x,y in list_most_common_words:
+#             a = TopWords(word_eng=x, word_frequency=y)
+#             a.save()
+
+        #save_to_base()
