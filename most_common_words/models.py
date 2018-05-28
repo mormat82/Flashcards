@@ -11,7 +11,6 @@ class TopWords(models.Model):
     word_eng = models.CharField(max_length=255, blank=True)
     word_frequency = models.SmallIntegerField(default=0)
     level = models.SmallIntegerField(default=0)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
