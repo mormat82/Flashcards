@@ -62,3 +62,6 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 return render(request, "top_words.html", ctx)
 
 
+# class LearnedWords(LoginRequiredMixin, View):
+
+
