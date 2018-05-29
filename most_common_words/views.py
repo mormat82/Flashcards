@@ -34,15 +34,14 @@ class FlashcardsListView(LoginRequiredMixin, View):
                                  replace(":", "").
                                  replace("/", "")
                                 for line in f for word in line.split()]
-                list_lower_case = [n.lower() for n in list_clear_words if len(n) > 2]
-
+                list_lower_case = [n.lower() for n in list_clear_words if len(n) > 1]
+                self.count_all_words = len(list_lower_case)
                 list_unique_words = list(set(list_lower_case))
+                self.count_unique_words = len(list_unique_words)
                 print("lista bez duplikatów to", len(list_unique_words), "słów")
                 list_without_known_words = [x for x in list_lower_case if x not in know_words]
-                print(len(list_without_known_words))
                 word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
-                list_most_common_words = word_counts.most_common(150)  # już na tym można działać, wyświetlić listę na stronie
-                # print(list_most_common_words)
+                list_most_common_words = word_counts.most_common(150)
                 return list_most_common_words
 
 
@@ -53,11 +52,15 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 list_most_common_words = self.most_used_words(request)
                 current_user = request.user
                 id_project1 = self.id_project
+                all_words = self.count_all_words
+                unique_words = self.count_unique_words
                 for x,y in list_most_common_words:
                     a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
                     a.save()
                 ctx = {
                     "top_flashcards": list_most_common_words,
+                    "all_words": all_words,
+                    "unique_words": unique_words,
                 }
                 return render(request, "top_words.html", ctx)
 

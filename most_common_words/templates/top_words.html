@@ -2,6 +2,8 @@
 
 {% block content %}
     <h2>Najczęściej występujące słówka:</h2>
+    <p>W książce jest {{ all_words }} wszystkich słów.</p>
+    <p>W książce jest {{ unique_words }} unikalnych słów.</p>
     <ul>
            {% for flashcard in top_flashcards %}
                <li>
