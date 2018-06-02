@@ -44,7 +44,6 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 list_most_common_words = word_counts.most_common(150)
                 return list_most_common_words
 
-
     def get(self, request):
         if request.method == 'GET':
             if request.GET.get("id_project"):
