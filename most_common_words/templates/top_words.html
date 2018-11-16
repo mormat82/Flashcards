@@ -4,13 +4,42 @@
     <h2>Najczęściej występujące słówka:</h2>
     <p>W książce jest {{ all_words }} wszystkich słów.</p>
     <p>W książce jest {{ unique_words }} unikalnych słów.</p>
-    <ul>
-           {% for flashcard in top_flashcards %}
-               <li>
-                   <p>{{ flashcard.0 }} {{ flashcard.1 }}</p>
-{#                   <input type="button" value="Dodaj do nauczonych">#}
-               </li>
-           {% endfor %}
-    </ul>
+    <!--<ul>-->
+        <!--<table class="table table-sm">-->
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Słówka</th>
+              <th scope="col">Ilość powtórzeń</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for flashcard in top_flashcards %}
+                <tr>
+                  <td>{{ flashcard.0 }}</td>
+                  <td>{{ flashcard.1 }}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+     <!--<table style="width:100%">-->
+         <!--<tr>-->
+             <!--<th>Słówka</th>-->
+             <!--<th>Ilość powtórzeń</th>-->
+         <!--</tr>-->
+
+         <!--{% for flashcard in top_flashcards %}-->
+
+         <!--<tr>-->
+             <!--<th>{{ flashcard.0 }}</th>-->
+             <!--<th>{{ flashcard.1 }}</th>-->
+         <!--</tr>-->
+               <!--<li>-->
+                   <!--<p>{{ flashcard.0 }} {{ flashcard.1 }}</p>-->
+<!--{#                   <input type="button" value="Dodaj do nauczonych">#}-->
+               <!--</li>-->
+           <!--{% endfor %}-->
+     <!--</table>-->
+    <!--</ul>-->
 
 {% endblock content %}
