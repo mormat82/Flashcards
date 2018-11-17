@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'flashcards.wsgi.application'
 DATABASES = {
     'default': {
         'HOST': '127.0.0.1',
-        'NAME': 'flashcards',
+        'NAME': 'flashcards_db',
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'root',
-        'PASSWORD': 'coderslab',
+        'USER': 'tabbydb',
+        'PASSWORD': 'Krowa444',
         'OPTIONS': {
                     'autocommit': True,
         },
