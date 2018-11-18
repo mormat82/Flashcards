@@ -23,23 +23,18 @@
             </button>
 
             <div class="collapse navbar-collapse col-md-7" id="mainmenu">
-                {% if request.user.is_authenticated %}
+
                     <ul class="navbar-nav">
                         <li {% if section == "dashboard" %}class="nav-item"{% endif %}>
                             <a class="nav-link" href="{% url "dashboard" %}">Strona główna</a>
                         </li>
+                {% if request.user.is_authenticated %}
                         <li {% if section == "people" %}class="nav-item"{% endif %}>
                             <a class="nav-link" href="/upload-files/uploads/form/">Zaimportuj książkę</a>
                         </li>
                         <li {% if section == "images" %}class="nav-item"{% endif %}>
                             <a class="nav-link" href="{% url "home" %}">Twoje książki</a>
                         </li>
-                    </ul>
-                {% else %}
-                    <ul class="navbar-nav">
-                        <li {% if section == "dashboard" %}class="nav-item"{% endif %}>
-                            <a class="nav-link" href="{% url "dashboard" %}">Strona główna</a>
-
                     </ul>
                 {% endif %}
             </div>
