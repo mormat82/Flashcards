@@ -3,3 +3,9 @@
 body {
     padding-top: 65px;
 }
+
+#brand {
+    color: white;
+    font-weight: bold;
+
+}
