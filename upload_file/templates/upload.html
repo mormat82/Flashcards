@@ -3,9 +3,8 @@
 {% block content %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Zaimportuj</button>
+    {{ form.as_ul }}
+    <li><button type="submit">Zaimportuj</button></li>
   </form>
 
-  <p><a href="{% url 'home' %}">Twoje książki</a></p>
 {% endblock %}
