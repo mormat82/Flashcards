@@ -31,10 +31,16 @@
                         </li>
                             {% if request.user.is_authenticated %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/upload-files/uploads/form/">Zaimportuj książkę</a>
+                                    <a class="nav-link" href="/upload-files/uploads/form/">Rozpocznij projekt</a>
                                  </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url "home" %}">Twoje książki</a>
+                                    <a class="nav-link" href="{% url "home" %}">Twoje projekty</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">Gotowe talie</a>
+                                </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link">Słówka nauczone</a>
                                 </li>
                             {% endif %}
                     </ul>
