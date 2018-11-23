@@ -13,10 +13,14 @@
       <li>
         <a>{{ obj.document.name }}</a> <br>
         <!--<small>(Uploaded at: {{ obj.uploaded_at }})</small>-->
-          <!--<small>(ID: {{ obj.id }})</small>-->
+        <small>(ID: {{ obj.id }})</small>
         <!--<button type="button" class="btn btn-info">Generuj fiszki</button>-->
         <a href="/most-common-words/?name_doc={{ obj.document.name }}&id_project={{ obj.id }}" class="btn btn-info">
-            Generuj fiszki
+            Zapisz fiszki
+        </a>
+{#          tutaj jest źle przekazywany name_project_id do widoków#}
+        <a href="/most-common-words/segregate/?name_project_1={{ obj.id }}" class="btn btn-info">
+            pokaż fiszki
         </a>
       </li>
     {% endfor %}

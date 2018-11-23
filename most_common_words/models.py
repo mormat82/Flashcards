@@ -15,4 +15,3 @@ class TopWords(models.Model):
 
     def __str__(self):
         return self.word_eng
-

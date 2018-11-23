@@ -2,13 +2,32 @@
 
 {% block content %}
     <h2>Dodaj do nauczenia lub do tych, które umiesz:</h2>
-{#    <ul>#}
-{#           {% for flashcard in top_flashcards %}#}
-{#               <li>#}
-{#                   <p>{{ flashcard.0 }}</p>#}
-{#                   <input type="button" value="Dodaj do nauczonych">#}
-{#               </li>#}
-{#           {% endfor %}#}
-{#    </ul>#}
 
+    <p>W książce jest {{ all_words }} wszystkich słów.</p>
+    <p>W książce jest {{ unique_words }} unikalnych słów.</p>
+    <p>Najczęściej występujące słówka:</p>
+    <!--<ul>-->
+        <!--<table class="table table-sm">-->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Słówka</th>
+              <th scope="col">Ilość powtórzeń</th>
+              <th scope="col">np. button dodaj do nauczonych</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in topWords_1 %}
+                <tr>
+                  <td>{{ obj.word_eng }}</td>
+                  <td>{{ obj.word_frequency }}</td>
+                  <td>-</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+{#      </li>#}
+{#    {% endfor %}#}
+{#  </ul>#}
 {% endblock content %}

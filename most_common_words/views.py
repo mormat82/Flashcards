@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from collections import Counter
 from django.views import View
 from most_common_words.models import TopWords
+from django.contrib.auth.decorators import login_required
 
 
 know_words = ['public', 'that', 'you', 'the', 'and', 'which', 'with', 'their', 'will', 'this',
@@ -41,7 +42,7 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 print("lista bez duplikatów to", len(list_unique_words), "słów")
                 list_without_known_words = [x for x in list_lower_case if x not in know_words]
                 word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
-                list_most_common_words = word_counts.most_common(150)
+                list_most_common_words = word_counts.most_common(5)
                 return list_most_common_words
 
     def get(self, request):
@@ -61,9 +62,14 @@ class FlashcardsListView(LoginRequiredMixin, View):
                     "all_words": all_words,
                     "unique_words": unique_words,
                 }
-                return render(request, "top_words.html", ctx)
+                 # return render(request, "top_words.html", ctx)
+                return render(request, "thanks.html", ctx)
 
 
 # class LearnedWords(LoginRequiredMixin, View):
-
+@login_required
+def segregate(request):
+    name_project_1 = request.GET.get("name_project_1")
+    topWords_1 = TopWords.objects.filter(name_project_id = name_project_1)
+    return render(request, 'segregate.html', { 'topWords_1': topWords_1 })
 
