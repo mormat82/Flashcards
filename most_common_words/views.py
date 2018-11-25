@@ -4,7 +4,7 @@ from collections import Counter
 from django.views import View
 from most_common_words.models import TopWords
 from django.contrib.auth.decorators import login_required
-
+from re import split
 
 know_words = ['public', 'that', 'you', 'the', 'and', 'which', 'with', 'their', 'will', 'this',
               'have', 'they', 'from', 'business', 'would', 'what', 'because',
@@ -26,23 +26,16 @@ class FlashcardsListView(LoginRequiredMixin, View):
             if request.GET.get("name_doc"):
                 self.name_doc = request.GET.get("name_doc")
                 with open("/home/mati/PycharmProjects/Flashcards/" + self.name_doc) as f:
-                    list_clear_words = [word.replace(",", "").
-                                 replace(".", "").
-                                 replace('"', '').
-                                 replace("=", "").
-                                 replace('[', '').
-                                 replace('(', '').
-                                 replace(":", "").
-                                 replace("/", "")
-                                for line in f for word in line.split()]
-                list_lower_case = [n.lower() for n in list_clear_words if len(n) > 1]
+                    file_to_str = f.read()
+                    list_clear_words = split(r'[,."=[(:?!/;\s]\s*', file_to_str)
+                list_lower_case = [n.lower() for n in list_clear_words if len(n) > 2]
                 self.count_all_words = len(list_lower_case)
                 list_unique_words = list(set(list_lower_case))
                 self.count_unique_words = len(list_unique_words)
                 print("lista bez duplikatów to", len(list_unique_words), "słów")
                 list_without_known_words = [x for x in list_lower_case if x not in know_words]
                 word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
-                list_most_common_words = word_counts.most_common(5)
+                list_most_common_words = word_counts.most_common(300)
                 return list_most_common_words
 
     def get(self, request):
