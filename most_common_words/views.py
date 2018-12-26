@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from collections import Counter
 from django.views import View
-from most_common_words.models import TopWords
+from most_common_words.models import TopWords, Statistics
 from django.contrib.auth.decorators import login_required
 from re import split
 
@@ -40,36 +40,40 @@ def get_list_words():
         list_lower_case = [n.lower() for n in list_words if len(n) > 2]
         return list_lower_case
 
-# def show_most_common_words()
-#     list_without_known_words = [x for x in list_lower_case if x not in know_words]
-#     word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
-#     list_most_common_words = word_counts.most_common(300)
-#     return list_most_common_words
+def save_most_common_words():
+    list_without_known_words = [x for x in get_list_words() if x not in know_words]
+    word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
+    list_most_common_words = word_counts.most_common(300)
+    # return list_most_common_words
+    current_user = request.user
+    id_project1 = get_id_project(request)
+    for x,y in list_most_common_words:
+        a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
+        a.save()
+    ctx = {
+    }
+    return render(request, "thanks.html", ctx)
 
-def statistics_list():
-      count_all_words = len(get_list_words())
-      list_unique_words = list(set(get_list_words()))
-      count_unique_words = len(list_unique_words)
-      print("lista bez duplikatów to", len(list_unique_words), "słów")
-      list_without_known_words = [x for x in list_lower_case if x not in know_words]
-      word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
-      list_most_common_words = word_counts.most_common(300)
-      # return list_most_common_words
-      # list_most_common_words = most_used_words(request)
-      current_user = request.user
-      id_project1 = id_project
-      all_words = count_all_words
-      unique_words = count_unique_words
-      for x,y in list_most_common_words:
-          a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
-          a.save()
-      ctx = {
-          "top_flashcards": list_most_common_words,
-          "all_words": all_words,
-          "unique_words": unique_words,
-      }
-       # return render(request, "top_words.html", ctx)
-      return render(request, "thanks.html", ctx)
+def statistics():
+    total_amount_of_words = len(get_list_words())
+    list_unique_words = list(set(get_list_words()))
+    amount_of_unique_words = len(list_unique_words)
+    list_without_known_words = [x for x in get_list_words() if x not in know_words]
+    amount_of_unknown_words = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
+    b = Statistics(total_amount_of_words=total_amount_of_words, amount_of_unique_words=amount_of_unique_words, amount_of_unknown_words=amount_of_unknown_words)
+    b.save()
+    # word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
+    # list_most_common_words = word_counts.most_common(300)
+    # return list_most_common_words
+    # list_most_common_words = most_used_words(request)
+    # current_user = request.user
+    # id_project1 = get_id_project(request)
+    # for x,y in list_most_common_words:
+    #     a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
+    #     a.save()
+    # ctx = {
+    # }
+    # return render(request, "thanks.html", ctx)
 
 
 # @login_required

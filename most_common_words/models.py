@@ -12,6 +12,15 @@ class TopWords(models.Model):
     word_frequency = models.SmallIntegerField(default=0)
     level = models.SmallIntegerField(default=0)
 
-
     def __str__(self):
         return self.word_eng
+
+
+class Statistics(models.Model):
+    name_project = models.ForeignKey(Document, on_delete=models.CASCADE, default='')
+    total_amount_of_words = models.SmallIntegerField(default=0)
+    amount_of_unique_words = models.SmallIntegerField(default=0)
+    amount_of_unknown_words = models.SmallIntegerField(default=0)
+
+    def __str__(self):
+        return self.total_amount_of_words
