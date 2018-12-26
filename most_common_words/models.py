@@ -18,9 +18,9 @@ class TopWords(models.Model):
 
 class Statistics(models.Model):
     name_project = models.ForeignKey(Document, on_delete=models.CASCADE, default='')
-    total_amount_of_words = models.SmallIntegerField(default=0)
-    amount_of_unique_words = models.SmallIntegerField(default=0)
-    amount_of_unknown_words = models.SmallIntegerField(default=0)
+    total_amount_of_words = models.IntegerField(default=0)
+    amount_of_unique_words = models.IntegerField(default=0)
+    amount_of_unknown_words = models.IntegerField(default=0)
 
     def __str__(self):
         return self.total_amount_of_words
