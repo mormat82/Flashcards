@@ -40,6 +40,12 @@ def get_list_words():
         list_lower_case = [n.lower() for n in list_words if len(n) > 2]
         return list_lower_case
 
+# def show_most_common_words()
+#     list_without_known_words = [x for x in list_lower_case if x not in know_words]
+#     word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
+#     list_most_common_words = word_counts.most_common(300)
+#     return list_most_common_words
+
 def statistics_list():
       count_all_words = len(get_list_words())
       list_unique_words = list(set(get_list_words()))
