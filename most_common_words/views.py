@@ -19,44 +19,73 @@ know_words = ['public', 'that', 'you', 'the', 'and', 'which', 'with', 'their', '
               'they', 'propaganda', 'must', 'made', 'other', 'news', 'ebook', 'big']
 
 
-class FlashcardsListView(LoginRequiredMixin, View):
+# class FlashcardsListView(LoginRequiredMixin, View):
+@login_required
+def get_name_doc(request):
+    if request.method == 'GET':
+        if request.GET.get("name_doc"):
+            name_doc = request.GET.get("name_doc")
+            return name_doc
 
-    def most_used_words(self, request):
-        if request.method == 'GET':
-            if request.GET.get("name_doc"):
-                self.name_doc = request.GET.get("name_doc")
-                with open("/home/mati/PycharmProjects/Flashcards/" + self.name_doc) as f:
-                    file_to_str = f.read()
-                    list_clear_words = split(r'[,."=[(:?!/;\s]\s*', file_to_str)
-                list_lower_case = [n.lower() for n in list_clear_words if len(n) > 2]
-                self.count_all_words = len(list_lower_case)
-                list_unique_words = list(set(list_lower_case))
-                self.count_unique_words = len(list_unique_words)
-                print("lista bez duplikatów to", len(list_unique_words), "słów")
-                list_without_known_words = [x for x in list_lower_case if x not in know_words]
-                word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
-                list_most_common_words = word_counts.most_common(300)
-                return list_most_common_words
+def get_id_project(request):
+    if request.method == 'GET':
+        if request.GET.get("id_project"):
+            id_project = request.GET.get("id_project")
+            return id_project
 
-    def get(self, request):
-        if request.method == 'GET':
-            if request.GET.get("id_project"):
-                self.id_project = request.GET.get("id_project")
-                list_most_common_words = self.most_used_words(request)
-                current_user = request.user
-                id_project1 = self.id_project
-                all_words = self.count_all_words
-                unique_words = self.count_unique_words
-                for x,y in list_most_common_words:
-                    a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
-                    a.save()
-                ctx = {
-                    "top_flashcards": list_most_common_words,
-                    "all_words": all_words,
-                    "unique_words": unique_words,
-                }
-                 # return render(request, "top_words.html", ctx)
-                return render(request, "thanks.html", ctx)
+def get_list_words():
+    with open("/home/mati/PycharmProjects/Flashcards/" + name_doc) as f:
+        file_to_str = f.read()
+        list_words = split(r'[,."=[(:?!/;\s]\s*', file_to_str)
+        list_lower_case = [n.lower() for n in list_words if len(n) > 2]
+        return list_lower_case
+
+def statistics_list():
+      count_all_words = len(get_list_words())
+      list_unique_words = list(set(get_list_words()))
+      count_unique_words = len(list_unique_words)
+      print("lista bez duplikatów to", len(list_unique_words), "słów")
+      list_without_known_words = [x for x in list_lower_case if x not in know_words]
+      word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
+      list_most_common_words = word_counts.most_common(300)
+      # return list_most_common_words
+      # list_most_common_words = most_used_words(request)
+      current_user = request.user
+      id_project1 = id_project
+      all_words = count_all_words
+      unique_words = count_unique_words
+      for x,y in list_most_common_words:
+          a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
+          a.save()
+      ctx = {
+          "top_flashcards": list_most_common_words,
+          "all_words": all_words,
+          "unique_words": unique_words,
+      }
+       # return render(request, "top_words.html", ctx)
+      return render(request, "thanks.html", ctx)
+
+
+# @login_required
+# def get(request):
+#     if request.method == 'GET':
+#         if request.GET.get("id_project"):
+#             id_project = request.GET.get("id_project")
+#             list_most_common_words = most_used_words(request)
+#             current_user = request.user
+#             id_project1 = id_project
+#             all_words = count_all_words
+#             unique_words = count_unique_words
+#             for x,y in list_most_common_words:
+#                 a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
+#                 a.save()
+#             ctx = {
+#                 "top_flashcards": list_most_common_words,
+#                 "all_words": all_words,
+#                 "unique_words": unique_words,
+#             }
+#              # return render(request, "top_words.html", ctx)
+#             return render(request, "thanks.html", ctx)
 
 
 # class LearnedWords(LoginRequiredMixin, View):
