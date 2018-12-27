@@ -63,6 +63,11 @@ def save_most_common_words(request):
 @login_required
 def segregate(request):
     name_project_1 = request.GET.get("name_project_1")
-    topWords_1 = TopWords.objects.filter(name_project_id = name_project_1)
-    return render(request, 'segregate.html', { 'topWords_1': topWords_1 })
+    top_words = TopWords.objects.filter(name_project_id = name_project_1)
+    statistics = Statistics.objects.filter(name_project_id = name_project_1)
+    ctx = {
+        "statistics": statistics,
+        "top_words": top_words,
+    }
+    return render(request, 'segregate.html', ctx)
 
