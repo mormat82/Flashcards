@@ -32,7 +32,6 @@ class FlashcardsListView(LoginRequiredMixin, View):
                 self.count_all_words = len(list_lower_case)
                 list_unique_words = list(set(list_lower_case))
                 self.count_unique_words = len(list_unique_words)
-                print("lista bez duplikatów to", len(list_unique_words), "słów")
                 list_without_known_words = [x for x in list_lower_case if x not in know_words]
                 word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
                 list_most_common_words = word_counts.most_common(300)
@@ -55,11 +54,9 @@ class FlashcardsListView(LoginRequiredMixin, View):
                     "all_words": all_words,
                     "unique_words": unique_words,
                 }
-                 # return render(request, "top_words.html", ctx)
                 return render(request, "thanks.html", ctx)
 
 
-# class LearnedWords(LoginRequiredMixin, View):
 @login_required
 def segregate(request):
     name_project_1 = request.GET.get("name_project_1")
