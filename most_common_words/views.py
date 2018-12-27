@@ -44,21 +44,19 @@ def save_most_common_words(request):
     list_total_words = get_list_words(request)
     list_unique_words = list(set(list_total_words))
     list_without_known_words = [x for x in list_unique_words if x not in know_words]
-    word_counts = Counter(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
-    list_most_common_words = word_counts.most_common(300)
+    word_counts = Counter(list_total_words)  # do zapisania do bazy/ słówka bez liczb
+    list_most_common_words = word_counts.most_common(5000)
     current_user = request.user
     id_project1 = get_id_project(request)
     for x,y in list_most_common_words:
         a = TopWords(word_eng=x, word_frequency=y, user_id=current_user.id, name_project_id=id_project1)
         a.save()
-    ctx = {
-    }
     total_amount_of_words = len(list_total_words)
     amount_of_unique_words = len(list_unique_words)
     amount_of_unknown_words = len(list_without_known_words)  # do zapisania do bazy/ słówka bez liczb
     b = Statistics(total_amount_of_words=total_amount_of_words, amount_of_unique_words=amount_of_unique_words, amount_of_unknown_words=amount_of_unknown_words, name_project_id=id_project1)
     b.save()
-    return render(request, "thanks.html", ctx)
+    return render(request, "thanks.html")
 
 
 # class LearnedWords(LoginRequiredMixin, View):
