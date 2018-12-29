@@ -45,7 +45,7 @@ def save_most_common_words(request):
     list_unique_words = list(set(list_total_words))
     list_without_known_words = [x for x in list_unique_words if x not in know_words]
     word_counts = Counter(list_total_words)  # do zapisania do bazy/ słówka bez liczb
-    list_most_common_words = word_counts.most_common(5000)
+    list_most_common_words = word_counts.most_common(1000)
     current_user = request.user
     id_project1 = get_id_project(request)
     for x,y in list_most_common_words:
