@@ -15,7 +15,7 @@
             <tr>
               <th scope="col">Słówka</th>
               <th scope="col">Ilość powtórzeń</th>
-              <th scope="col">np. button dodaj do nauczonych</th>
+              <th scope="col">Dodaj do nauczonych</th>
             </tr>
           </thead>
           <tbody>
@@ -23,7 +23,11 @@
                 <tr>
                   <td>{{ obj.word_eng }}</td>
                   <td>{{ obj.word_frequency }}</td>
-                  <td>-</td>
+                  <td>
+                        <a href="/most-common-words/?name_doc={{ obj.document.name }}&id_project={{ obj.id }}" class="btn btn-info">
+                        Umiem
+                        </a>
+                  </td>
                 </tr>
             {% endfor %}
           </tbody>
