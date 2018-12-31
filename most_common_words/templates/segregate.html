@@ -24,7 +24,8 @@
                   <td>{{ obj.word_eng }}</td>
                   <td>{{ obj.word_frequency }}</td>
                   <td>
-                        <a href="/most-common-words/?name_doc={{ obj.document.name }}&id_project={{ obj.id }}" class="btn btn-info">
+{#                        <a href="/most-common-words/?name_doc={{ obj.document.name }}&id_project={{ obj.id }}" class="btn btn-info">#}
+                        <a href="/most-common-words/delete-word/?id_word={{ obj.id }}" class="btn btn-info">
                         Umiem
                         </a>
                   </td>
