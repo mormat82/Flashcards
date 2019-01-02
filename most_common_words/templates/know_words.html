@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Słówka, które umiesz:</h2>
+
+    <p>Najczęściej występujące słówka:</p>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Słówka</th>
+              <th scope="col">Usuń z nauczonych (jeszcze nie działa)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in know_words %}
+                <tr>
+                  <td>{{ obj.word_eng }}</td>
+                  <td>
+                        <a href="#" class="btn btn-info">
+                        usuń z nauczonych
+                        </a>
+                  </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+{% endblock content %}
