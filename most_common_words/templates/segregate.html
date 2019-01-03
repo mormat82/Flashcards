@@ -8,8 +8,6 @@
         <p>Słowa, których jeszcze nie umiesz: {{ obj.amount_of_unknown_words }}.</p><br>
     {% endfor %}
     <p>Najczęściej występujące słówka:</p>
-    <!--<ul>-->
-        <!--<table class="table table-sm">-->
         <table class="table table-striped">
           <thead>
             <tr>
@@ -33,8 +31,4 @@
             {% endfor %}
           </tbody>
         </table>
-
-{#      </li>#}
-{#    {% endfor %}#}
-{#  </ul>#}
 {% endblock content %}

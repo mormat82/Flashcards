@@ -7,13 +7,13 @@ from re import split
 from django.db.models import Q
 
 
-# know_words1 = ['public', 'that', 'you', 'the', 'and', 'which', 'with', 'their', 'will', 'this', 'have', 'they', 'from',
-#               'business', 'would', 'what', 'because', 'should', 'more', 'american', 'were', 'only', 'been', 'these',
-#               'group', 'make', 'this', 'some', 'opinion', 'large', 'than', 'work', 'ideas', 'most', 'them', 'there',
-#               'when', 'very', 'those', 'idea', 'there', 'every', 'public', 'does', 'women', 'good', 'many', 'business',
-#               'radio', 'life', 'number', 'known', 'fashion', 'under', 'best', 'understand', 'cannot', 'millions',
-#               'makes', 'then', 'take', 'education', 'college', 'like', 'years', 'school', 'true', 'great', 'time',
-#               'world', 'they', 'propaganda', 'must', 'made', 'other', 'news', 'ebook', 'big', 'for', 'not', 'all']
+know_words_1 = ['public', 'that', 'you', 'the', 'and', 'which', 'with', 'their', 'will', 'this', 'have', 'they', 'from',
+              'business', 'would', 'what', 'because', 'should', 'more', 'american', 'were', 'only', 'been', 'these',
+              'group', 'make', 'this', 'some', 'opinion', 'large', 'than', 'work', 'ideas', 'most', 'them', 'there',
+              'when', 'very', 'those', 'idea', 'there', 'every', 'public', 'does', 'women', 'good', 'many', 'business',
+              'radio', 'life', 'number', 'known', 'fashion', 'under', 'best', 'understand', 'cannot', 'millions',
+              'makes', 'then', 'take', 'education', 'college', 'like', 'years', 'school', 'true', 'great', 'time',
+              'world', 'they', 'propaganda', 'must', 'made', 'other', 'news', 'ebook', 'big', 'for', 'not', 'all']
 
 
 def get_name_doc(request):
@@ -35,17 +35,17 @@ def get_list_words(request):
         list_lower_case = [n.lower() for n in list_words if len(n) > 2]
         return list_lower_case
 
-def know_words_1(request):
-    current_user = request.user
-    know_words = TopWords.objects.filter(Q(level = 5) & (Q(user_id=current_user.id) | Q(user_id=6)))
-    print(know_words)
-    return list(know_words)
+# def know_words_1(request):
+#     current_user = request.user
+#     know_words = TopWords.objects.filter(Q(level = 5) & (Q(user_id=current_user.id) | Q(user_id=6)))
+#     print(know_words)
+#     return list(know_words)
 
 @login_required
 def save_most_common_words(request):
     list_total_words = get_list_words(request)
     list_unique_words = list(set(list_total_words))
-    list_without_known_words_total = [x for x in list_total_words if x not in know_words_1(request)]
+    list_without_known_words_total = [x for x in list_total_words if x not in know_words_1]
     word_counts_2 = Counter(list_without_known_words_total)
     list_most_common_words = word_counts_2.most_common(300)
     current_user = request.user
@@ -55,7 +55,7 @@ def save_most_common_words(request):
         a.save()
     total_amount_of_words = len(list_total_words)
     amount_of_unique_words = len(list_unique_words)
-    list_without_known_words_unique = [x for x in list_unique_words if x not in know_words_1(request)]
+    list_without_known_words_unique = [x for x in list_unique_words if x not in know_words_1]
     amount_of_unknown_words = len(list_without_known_words_unique)
     b = Statistics(total_amount_of_words=total_amount_of_words, amount_of_unique_words=amount_of_unique_words,
                    amount_of_unknown_words=amount_of_unknown_words, name_project_id=id_project1)
